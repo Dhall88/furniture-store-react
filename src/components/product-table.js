@@ -20,17 +20,25 @@ export default function ProductTable() {
 //     setSelectedId(null); // Clear selection
 //   };
 
-  const rows = state.products.map(product => (
-    <Table.Row
-      key={product.id}
-      onClick={() => setSelectedId(product.id)}
-      active={product.id === selectedId}
-    >
-      <Table.Cell>{product.id}</Table.Cell>
-      <Table.Cell>{product.name}</Table.Cell>
-      <Table.Cell>{product.price}</Table.Cell>
-    </Table.Row>
-  ));
+  const splitUrl = window.location.href.split("/");
+  const filter = splitUrl[splitUrl.length-1];
+
+  
+  const current = state.products.filter(product => product.tags.search(filter)!=-1)
+
+  const rows = current.map(product => (
+      <Table.Row
+        key={product.id}
+        onClick={() => setSelectedId(product.id)}
+        active={product.id === selectedId}
+      >
+        <Table.Cell>{product.id}</Table.Cell>
+        <Table.Cell>{product.name}</Table.Cell>
+        <Table.Cell>{product.price}</Table.Cell>
+      </Table.Row>
+
+  )
+  );
 
   return (
     <Segment>

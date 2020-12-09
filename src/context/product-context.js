@@ -9,21 +9,21 @@ const initialState = {
       name: "Bed",
       price: 100,
       description: "big and sqishy",
-      tags: ["bedroom"]
+      tags: "bedroom"
     },
     {
       id: "099",
       name: "Table",
       price: 150,
       description: "good at holding stuff",
-      tags: ["bedroom","dining room"]
+      tags: "bedroom dining-room"
     },
     {
       id: "100",
       name: "TV Stand",
       price: 50,
       description: "holds a tv nicely",
-      tags: ["living room, storage"]
+      tags: "living-room storage"
     }
   ],
   loading: false,
