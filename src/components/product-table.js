@@ -22,8 +22,7 @@ const ProductTable = (props) => {
 //     setSelectedId(null); // Clear selection
 //   };
 
-  const filter = props.tag
-  const current = state.products.filter(product => product.tags.search(filter)!=-1)
+  const current = state.products.filter(product => product.tags.search(props.tag)!=-1)
 
   const rows = current.map(product => (
       <Table.Row
@@ -34,6 +33,7 @@ const ProductTable = (props) => {
         <Table.Cell>{product.id}</Table.Cell>
         <Table.Cell>{product.name}</Table.Cell>
         <Table.Cell>{product.price}</Table.Cell>
+        <Table.Cell>{product.description}</Table.Cell>
       </Table.Row>
 
   )
@@ -47,6 +47,7 @@ const ProductTable = (props) => {
             <Table.HeaderCell>Id</Table.HeaderCell>
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Price</Table.HeaderCell>
+            <Table.HeaderCell>Description</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>{rows}</Table.Body>
@@ -54,7 +55,7 @@ const ProductTable = (props) => {
           <Table.Row>
             <Table.HeaderCell />
             <Table.HeaderCell colSpan="4">
-              <Button
+              {/* <Button
                 floated="right"
                 icon
                 labelPosition="left"
@@ -62,9 +63,9 @@ const ProductTable = (props) => {
                 size="small"
                 disabled={!selectedId}
                 // onClick={}
-              > 
-              <Icon name="trash" /> Remove User
-              </Button>
+              >  */}
+              {/* <Icon name="trash" /> Remove User
+              </Button> */}
             </Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
