@@ -2,7 +2,9 @@ import React, { useState, useContext } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
 import { ProductContext } from "../context/product-context";
 
-export default function ProductTable() {
+// export default function ProductTable() {
+
+const ProductTable = (props) => {
   // Subscribe to `products` state and access dispatch function
   const [state, dispatch] = useContext(ProductContext);
   // Declare a local state to be used internally by this component
@@ -20,10 +22,7 @@ export default function ProductTable() {
 //     setSelectedId(null); // Clear selection
 //   };
 
-  const splitUrl = window.location.href.split("/");
-  const filter = splitUrl[splitUrl.length-1];
-
-  
+  const filter = props.tag
   const current = state.products.filter(product => product.tags.search(filter)!=-1)
 
   const rows = current.map(product => (
@@ -73,3 +72,5 @@ export default function ProductTable() {
     </Segment>
   );
 }
+
+export default ProductTable;

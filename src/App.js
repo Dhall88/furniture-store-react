@@ -2,6 +2,12 @@ import React from "react";
 import { HashRouter, NavLink, Route } from 'react-router-dom';
 import { Container } from "semantic-ui-react";
 import ProductView from "./views/product-view";
+import Home from "./views/home";
+import Bedroom from "./views/bedroom";
+import Bathroom from "./views/bathroom";
+import LivingRoom from "./views/living-room";
+import Storage from "./views/storage";
+import Outdoor from "./views/outdoor";
 
 export default function MainRouter() {
 
@@ -37,7 +43,7 @@ export default function MainRouter() {
 								exact
 								to="/bedroom"
 							>
-								Kitchen
+								Bedroom
 							</NavLink>
 							<NavLink
 								className='navlink'
@@ -59,14 +65,14 @@ export default function MainRouter() {
 						// className={Route.to === '/my-plots' ? '' : 'app-container'}
 						className={'site-container'}
 					>
-						<Route path="/" exact component={ProductView} />
+						<Route path="/" exact component={Home} />
 
 					</div>
-						<Route path="/living-room" component={ProductView} />
-						<Route path="/storage" component={ProductView} />
-						<Route path="/bedroom" component={ProductView} />
-						<Route path="/outdoor" component={ProductView} />
-						<Route path="/bathroom" component={ProductView} />
+						<Route path="/living-room" component={LivingRoom} />
+						<Route path="/storage" component={Storage} />
+						<Route path="/bedroom" component={Bedroom} />
+						<Route path="/outdoor" component={Outdoor} />
+						<Route path="/bathroom" component={Bathroom} />
 				</HashRouter>
 			</React.Fragment>
 		);
