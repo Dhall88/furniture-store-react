@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, Suspense } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
 import { ProductContext } from "../context/product-context";
 
@@ -9,6 +9,8 @@ const ProductTable = (props) => {
   const [state, dispatch] = useContext(ProductContext);
   // Declare a local state to be used internally by this component
   const [selectedId, setSelectedId] = useState();
+let test;
+
 
 //   const delproduct = id => {
 //     dispatch({
@@ -21,26 +23,50 @@ const ProductTable = (props) => {
 //     delproduct(selectedId);
 //     setSelectedId(null); // Clear selection
 //   };
+let current=[], rows;
 
-  const current = state.products.filter(product => product.tags.search(props.tag)!=-1)
 
-  const rows = current.map(product => (
-      <Table.Row
-        key={product.id}
-        onClick={() => setSelectedId(product.id)}
-        active={product.id === selectedId}
-      >
-        <Table.Cell>{product.id}</Table.Cell>
-        <Table.Cell>{product.name}</Table.Cell>
-        <Table.Cell>{product.price}</Table.Cell>
-        <Table.Cell>{product.description}</Table.Cell>
-      </Table.Row>
+useEffect(() => {
 
+  fetch('http://localhost:3000/products')
+  .then(response => response.json())
+  .then(data => {
+    // console.log(data[0])
+    data.filter(product => {
+      if(product.tags.search('bedroom')!=-1) {
+        current.push(product)
+      }
+    }
+    )
+      
+    }
   )
-  );
+  .then(() => { 
+    console.log(current)
+    rows = current.map(product => (
+        <Table.Row
+          key={product.id}
+          onClick={() => setSelectedId(product.id)}
+          active={product.id === selectedId}
+        >
+          <Table.Cell>{product.id}</Table.Cell>
+          <Table.Cell>{product.name}</Table.Cell>
+          <Table.Cell>{product.price}</Table.Cell>
+          <Table.Cell>{product.description}</Table.Cell>
+        </Table.Row>
+    
+      )
+    )
 
-  return (
+})  
+  });
+
+
+  function buildView() {
+    console.log("in build view")
+    return (
     <Segment>
+    {console.log('rendered')}
       <Table celled striped selectable>
         <Table.Header>
           <Table.Row>
@@ -71,6 +97,11 @@ const ProductTable = (props) => {
         </Table.Footer>
       </Table>
     </Segment>
+    )}
+  return (
+   <Suspense>
+     <buildView />
+   </Suspense>
   );
 }
 

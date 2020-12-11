@@ -1,4 +1,7 @@
 import React, { useReducer, createContext } from "react";
+let test;
+
+
 
 export const ProductContext = createContext();
 
@@ -26,9 +29,10 @@ const initialState = {
       tags: "living-room storage"
     }
   ],
-  loading: false,
+  loading: true,
   error: null
 };
+
 
 const reducer = (state, action) => {
   switch (action.type) {
