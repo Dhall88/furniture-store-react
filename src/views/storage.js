@@ -1,17 +1,13 @@
-import React from "react";
+import React, { useReducer, createContext, useEffect, useContext } from 'react'
 import { Segment, Header } from "semantic-ui-react";
 // import ProductForm from "../components/product-form";
 import ProductTable from "../components/product-table";
-import { ProductContextProvider } from "../context/product-context";
+import { ProductContextProvider, ProductContext } from "../context/product-context";
+import Catagory from './catagory'
 
-export default function Storage() {
+
+export default function Outdoor(products) {
   return (
-    <ProductContextProvider>
-      <Segment basic>
-        <Header as="h3">Storage</Header>
-        {/* <ProductForm /> */}
-        <ProductTable tag="storage"/>
-      </Segment>
-    </ProductContextProvider>
+    <Catagory products={products} tag='outdoor'/>
   );
 }

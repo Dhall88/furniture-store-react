@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useReducer, createContext, useEffect, useContext, Component } from 'react'
 import { HashRouter, NavLink, Route } from 'react-router-dom';
 import { Container } from "semantic-ui-react";
 import ProductView from "./views/product-view";
+import { ProductContext } from "./context/product-context";
 import Home from "./views/home";
 import Bedroom from "./views/bedroom";
 import Bathroom from "./views/bathroom";
 import LivingRoom from "./views/living-room";
 import Storage from "./views/storage";
 import Outdoor from "./views/outdoor";
+import { render } from '@testing-library/react';
 
-export default function MainRouter() {
+export default class MainRouter extends Component{
 
+	state = {
+		products:[]
+	}
+	
+	componentDidMount() {
+
+		fetch('http://localhost:3000/products')
+			.then(response => response.json())
+			.then(data => {   
+				this.setState({
+					products:data
+				}
+				)})
+				console.log('fetching')
+	}	
+
+	// 											const getProducts = (data) => {
+	// 												dispatch({
+	// 													type: "ADD_PRODUCT",
+	// 													payload: data
+	// 												});
+	// 											};
+	render() {
+		console.log(this.state.products)
 		return (
 			<React.Fragment>
 			<h1>React Funiture Store</h1>
@@ -68,17 +94,17 @@ export default function MainRouter() {
 						<Route path="/" exact component={Home} />
 
 					</div>
-						<Route path="/living-room" component={LivingRoom} />
+						<Route path="/living-room" component={()=>LivingRoom(this.state.products)} />
 						<Route path="/storage" component={Storage} />
-						<Route path="/bedroom" component={Bedroom} />
+						<Route path="/bedroom" component={()=>Bedroom(this.state.products)} />
 						<Route path="/outdoor" component={Outdoor} />
 						<Route path="/bathroom" component={Bathroom} />
 				</HashRouter>
 			</React.Fragment>
 		);
 }
-
-
+}
+// export default MainRouter
 // export default function App() {
 //   return (
 //     <Container>

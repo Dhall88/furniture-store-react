@@ -1,17 +1,13 @@
-import React from "react";
+import React, { useReducer, createContext, useEffect, useContext } from 'react'
 import { Segment, Header } from "semantic-ui-react";
 // import ProductForm from "../components/product-form";
 import ProductTable from "../components/product-table";
-import { ProductContextProvider } from "../context/product-context";
+import { ProductContextProvider, ProductContext } from "../context/product-context";
+import Catagory from './catagory'
 
-export default function Bathroom() {
+
+export default function Bathroom(products) {
   return (
-    <ProductContextProvider>
-      <Segment basic>
-        <Header as="h3">Bathroom</Header>
-        {/* <ProductForm /> */}
-        <ProductTable tag="bathroom"/>
-      </Segment>
-    </ProductContextProvider>
+    <Catagory products={products} tag='bathroom'/>
   );
 }

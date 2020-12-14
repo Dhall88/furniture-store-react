@@ -1,35 +1,17 @@
-import React, { useReducer, createContext } from "react";
-let test;
-
-
+import React, { useReducer, createContext, useEffect } from "react";
 
 export const ProductContext = createContext();
 
-const initialState = {
+  const initialState = {
   products: [
     {
-      id: "098",
-      name: "Bed",
+      name: "test",
+      description: "test",
       price: 100,
-      description: "big and sqishy",
-      tags: "bedroom"
-    },
-    {
-      id: "099",
-      name: "Table",
-      price: 150,
-      description: "good at holding stuff",
-      tags: "bedroom dining-room"
-    },
-    {
-      id: "100",
-      name: "TV Stand",
-      price: 50,
-      description: "holds a tv nicely",
-      tags: "living-room storage"
+      tags: "testestest"
     }
   ],
-  loading: true,
+  loading: false,
   error: null
 };
 
@@ -59,8 +41,11 @@ const reducer = (state, action) => {
   }
 };
 
+
 export const ProductContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+
 
   return (
     <ProductContext.Provider value={[state, dispatch]}>

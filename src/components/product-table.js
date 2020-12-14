@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, Suspense } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
 import { ProductContext } from "../context/product-context";
 
@@ -9,8 +9,8 @@ const ProductTable = (props) => {
   const [state, dispatch] = useContext(ProductContext);
   // Declare a local state to be used internally by this component
   const [selectedId, setSelectedId] = useState();
-let test;
 
+  console.log(props)
 
 //   const delproduct = id => {
 //     dispatch({
@@ -23,27 +23,33 @@ let test;
 //     delproduct(selectedId);
 //     setSelectedId(null); // Clear selection
 //   };
-let current=[], rows;
 
-
-useEffect(() => {
-
-  fetch('http://localhost:3000/products')
-  .then(response => response.json())
-  .then(data => {
-    // console.log(data[0])
-    data.filter(product => {
-      if(product.tags.search('bedroom')!=-1) {
-        current.push(product)
+    // useEffect(() => {
+    //   fetch('http://localhost:3000/products')
+    //   .then(response => response.json())
+    //   .then(data => {   
+    //     console.log(data)
+    //     dispatch({
+    //         type: "ADD_PRODUCT",
+    //         payload: data
+    //       },[]);
+    //   }
+    //   )
+    // })
+    const filter = (arr) => {
+      let res = [];
+      console.log(props.tag)
+      for(let i = 0; i<arr.length; i++) {
+        if(arr[i].tags.search(props.tag)!=-1) {
+          res.push(arr[i])
+        }
       }
+      return res;
     }
-    )
-      
-    }
-  )
-  .then(() => { 
-    console.log(current)
-    rows = current.map(product => (
+
+console.log(props.products)
+const rows = filter(props.products).map(product => (
+        
         <Table.Row
           key={product.id}
           onClick={() => setSelectedId(product.id)}
@@ -55,16 +61,10 @@ useEffect(() => {
           <Table.Cell>{product.description}</Table.Cell>
         </Table.Row>
     
-      )
-    )
+      ))
 
-})  
-  });
-
-
-  function buildView() {
-    console.log("in build view")
-    return (
+  
+  return (
     <Segment>
     {console.log('rendered')}
       <Table celled striped selectable>
@@ -97,11 +97,6 @@ useEffect(() => {
         </Table.Footer>
       </Table>
     </Segment>
-    )}
-  return (
-   <Suspense>
-     <buildView />
-   </Suspense>
   );
 }
 
