@@ -2,7 +2,7 @@ import React, { useReducer, createContext, useEffect, useContext, Component } fr
 import { HashRouter, NavLink, Route } from 'react-router-dom';
 import { Container } from "semantic-ui-react";
 import ProductView from "./views/product-view";
-import { ProductContext } from "./context/product-context";
+// import { ProductContext } from "./context/product-context";
 import Home from "./views/home";
 import Bedroom from "./views/bedroom";
 import Bathroom from "./views/bathroom";
@@ -26,15 +26,8 @@ export default class MainRouter extends Component{
 					products:data
 				}
 				)})
-				console.log('fetching')
 	}	
 
-	// 											const getProducts = (data) => {
-	// 												dispatch({
-	// 													type: "ADD_PRODUCT",
-	// 													payload: data
-	// 												});
-	// 											};
 	render() {
 		console.log(this.state.products)
 		return (
@@ -104,12 +97,3 @@ export default class MainRouter extends Component{
 		);
 }
 }
-// export default MainRouter
-// export default function App() {
-//   return (
-//     <Container>
-//       <h1>Product List</h1>
-//     <ProductView />
-//     </Container>
-//   );
-// }

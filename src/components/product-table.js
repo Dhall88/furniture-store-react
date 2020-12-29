@@ -1,16 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
-import { ProductContext } from "../context/product-context";
+// import { ProductContext } from "../context/product-context";
 
 // export default function ProductTable() {
 
 const ProductTable = (props) => {
-  // Subscribe to `products` state and access dispatch function
-  const [state, dispatch] = useContext(ProductContext);
-  // Declare a local state to be used internally by this component
-  const [selectedId, setSelectedId] = useState();
+  // // Subscribe to `products` state and access dispatch function
+  // const [state, dispatch] = useContext(ProductContext);
+  // // Declare a local state to be used internally by this component
+  // const [selectedId, setSelectedId] = useState();
 
-  console.log(props)
+  // console.log(props)
 
 //   const delproduct = id => {
 //     dispatch({
