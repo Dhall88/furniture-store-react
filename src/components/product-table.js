@@ -52,8 +52,8 @@ const rows = filter(props.products).map(product => (
         
         <Table.Row
           key={product.id}
-          onClick={() => setSelectedId(product.id)}
-          active={product.id === selectedId}
+          // onClick={() => setSelectedId(product.id)}
+          // active={product.id === selectedId}
         >
           <Table.Cell>{product.id}</Table.Cell>
           <Table.Cell>{product.name}</Table.Cell>

@@ -6,26 +6,40 @@ import ProductTable from "../components/product-table";
 import { Container, Row, Col, Jumbotron, Button } from 'react-bootstrap';
 // import { ProductContextProvider, ProductContext } from "../context/product-context";
 import Catagory from './catagory'
+import bgimage from '../imgs/jumbotron-bedroom.jpg'
 
 
 export default function Bedroom(products) {
 
-  const divStyle = {
+  const jumboStyle = {
+    position: 'relative',
     color: 'blue',
-    backgroundImage: 'url(../imgs/jumbotron-bedroom.jpg)',
+    backgroundImage: `url(${bgimage})`,
+    height: '25em',
+    backgroundSize: '100% 100%'
   };
+
+  const divStyle = {
+    position: 'relative',
+    width: '10rem',
+      marginLeft: '85%',
+      marginTop: '13rem'
+    // margin: 'auto'
+  }
+
 
   return (
     <div>
-          <Jumbotron fluid>
+          <Jumbotron style={jumboStyle} fluid>
       <h1>Bedroom</h1>
-      <p>
-        This is a simple hero unit, a simple jumbotron-style component for calling
-        extra attention to featured content or information.
-      </p>
-      <p>
-    <Button variant="primary">Learn more</Button>
-  </p>
+      <div style={divStyle}>
+        <p>
+          Get started with some design ideas.
+        </p>
+        <p>
+          <Button variant="primary">Learn more</Button>
+        </p>
+    </div>
 </Jumbotron>
 
       <Catagory products={products} tag='bedroom'/>

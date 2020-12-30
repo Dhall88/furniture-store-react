@@ -6,12 +6,12 @@ import ProductTable from "../components/product-table";
 
 export default function Products() {
   return (
-    <ProductContextProvider>
+    // <ProductContextProvider>
       <Segment basic>
         <Header as="h3">Products</Header>
         {/* <ProductForm /> */}
         <ProductTable />
       </Segment>
-    </ProductContextProvider>
+    // </ProductContextProvider>
   );
 }
