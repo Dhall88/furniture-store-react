@@ -3,7 +3,7 @@ import React, { useReducer, createContext, useEffect, useContext } from 'react'
 import { Segment, Header } from "semantic-ui-react";
 // import ProductForm from "../components/product-form";
 import ProductTable from "../components/product-table";
-import { Container, Row, Col, Jumbotron, Button } from 'react-bootstrap';
+import { Container, Row, Col, Jumbotron, Button, Pagination } from 'react-bootstrap';
 // import { ProductContextProvider, ProductContext } from "../context/product-context";
 import Catagory from './catagory'
 import bgimage from '../imgs/jumbotron-bedroom.jpg'
@@ -20,7 +20,7 @@ export default function Bedroom(products) {
   };
 
   const divStyle = {
-    position: 'relative',
+    // position: 'relative',
     width: '10rem',
       marginLeft: '85%',
       marginTop: '13rem'
@@ -43,6 +43,7 @@ export default function Bedroom(products) {
 </Jumbotron>
 
       <Catagory products={products} tag='bedroom'/>
+
     </div>
   );
 }

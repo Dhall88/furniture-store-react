@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
+import { Container, Row, Col, Pagination, PageItem} from "react-bootstrap"
 // import { ProductContext } from "../context/product-context";
 
 // export default function ProductTable() {
@@ -48,40 +49,54 @@ const ProductTable = (props) => {
     }
 
 console.log(props.products)
-const rows = filter(props.products).map(product => (
+const products = filter(props.products)
+const pages = Math.ceil(products.length/12)
+
+let active = 2;
+let items = [];
+for (let number = 1; number <= 5; number++) {
+  items.push(
+    <PageItem key={number} active={number === active}>
+      {number}
+    </PageItem>,
+  );
+}
         
-        <Table.Row
-          key={product.id}
-          // onClick={() => setSelectedId(product.id)}
-          // active={product.id === selectedId}
-        >
-          <Table.Cell>{product.id}</Table.Cell>
-          <Table.Cell>{product.name}</Table.Cell>
-          <Table.Cell>{product.price}</Table.Cell>
-          <Table.Cell>{product.description}</Table.Cell>
-        </Table.Row>
-    
-      ))
+        // <Table.Row
+        //   key={product.id}
+        //   // onClick={() => setSelectedId(product.id)}
+        //   // active={product.id === selectedId}
+        // >
+        //   <Table.Cell>{product.id}</Table.Cell>
+        //   <Table.Cell>{product.name}</Table.Cell>
+        //   <Table.Cell>{product.price}</Table.Cell>
+        //   <Table.Cell>{product.description}</Table.Cell>
+        // </Table.Row>
+        // <Container>
+        //   <Row>
+        //     <Col></Col>
+        //   </Row>
+        // </Container>
 
   
   return (
-    <Segment>
-    {console.log('rendered')}
-      <Table celled striped selectable>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Id</Table.HeaderCell>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Price</Table.HeaderCell>
-            <Table.HeaderCell>Description</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>{rows}</Table.Body>
-        <Table.Footer fullWidth>
-          <Table.Row>
-            <Table.HeaderCell />
-            <Table.HeaderCell colSpan="4">
-              {/* <Button
+    // <Segment>
+    // {console.log('rendered')}
+    //   <Table celled striped selectable>
+    //     <Table.Header>
+    //       <Table.Row>
+    //         <Table.HeaderCell>Id</Table.HeaderCell>
+    //         <Table.HeaderCell>Name</Table.HeaderCell>
+    //         <Table.HeaderCell>Price</Table.HeaderCell>
+    //         <Table.HeaderCell>Description</Table.HeaderCell>
+    //       </Table.Row>
+    //     </Table.Header>
+    //     <Table.Body>{rows}</Table.Body>
+    //     <Table.Footer fullWidth>
+    //       <Table.Row>
+    //         <Table.HeaderCell />
+    //         <Table.HeaderCell colSpan="4">
+              /* <Button
                 floated="right"
                 icon
                 labelPosition="left"
@@ -89,14 +104,19 @@ const rows = filter(props.products).map(product => (
                 size="small"
                 disabled={!selectedId}
                 // onClick={}
-              >  */}
-              {/* <Icon name="trash" /> Remove User
-              </Button> */}
-            </Table.HeaderCell>
+              >  */
+              /* <Icon name="trash" /> Remove User
+              </Button> */
+            /* </Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
       </Table>
-    </Segment>
+    </Segment> */
+              <div>
+                    <Pagination>{items}</Pagination>
+
+              </div>
+
   );
 }
 
