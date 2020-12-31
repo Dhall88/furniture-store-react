@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
 import { Container, Row, Col, Pagination, PageItem} from "react-bootstrap"
+import {LinkContainer} from "react-router-bootstrap"
 // import { ProductContext } from "../context/product-context";
 
 // export default function ProductTable() {
@@ -52,13 +53,15 @@ console.log(props.products)
 const products = filter(props.products)
 const pages = Math.ceil(products.length/12)
 
-let active = 2;
+let active = 1;
 let items = [];
 for (let number = 1; number <= 5; number++) {
   items.push(
-    <PageItem key={number} active={number === active}>
+    <LinkContainer to={`/bedroom/${number}`}>
+    <Pagination.Item key={number} activeLabel='(current)'>
       {number}
-    </PageItem>,
+    </Pagination.Item>
+    </LinkContainer>
   );
 }
         
