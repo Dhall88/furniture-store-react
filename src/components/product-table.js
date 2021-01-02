@@ -6,6 +6,8 @@ import {LinkContainer} from "react-router-bootstrap"
 
 // export default function ProductTable() {
 
+// console.log()
+
 const ProductTable = (props) => {
   // // Subscribe to `products` state and access dispatch function
   // const [state, dispatch] = useContext(ProductContext);
@@ -38,7 +40,24 @@ const ProductTable = (props) => {
     //   }
     //   )
     // })
-    const filter = (arr) => {
+
+    const products = tagFilter(props.products)
+    const pages = Math.ceil(products.length/12)
+
+    console.log(window.location.href)
+    
+    const activePage = () => {
+      const arr = window.location.href.split('/');
+      const active = Number(arr[arr.length-1])
+
+      if (Number.isInteger(active)&&active<pages) {
+        return active
+      }
+      return 1 
+
+    }
+
+    const tagFilter = (arr) => {
       let res = [];
       console.log(props.tag)
       for(let i = 0; i<arr.length; i++) {
@@ -49,16 +68,42 @@ const ProductTable = (props) => {
       return res;
     }
 
-console.log(props.products)
-const products = filter(props.products)
-const pages = Math.ceil(products.length/12)
+// console.log(props.products)
 
-let active = 1;
+const buildRows = () => {
+  const activePage = activePage();
+
+  return (
+  <Container>
+    <Row>
+      <Col>{products[0+(activePage-1)*12].name === undefined ? }</Col>
+      <Col>{products[1+(activePage-1)*12].name}</Col>
+      <Col>{products[2+(activePage-1)*12].name}</Col>
+    </Row>
+      <Row>
+      <Col>{products[3+(activePage-1)*12].name}</Col>
+      <Col>{products[4+(activePage-1)*12].name}</Col>
+      <Col>{products[5+(activePage-1)*12].name}</Col>
+    </Row>
+      <Row>
+      <Col>{products[6+(activePage-1)*12].name}</Col>
+      <Col>{products[7+(activePage-1)*12].name}</Col>
+      <Col>{products[8+(activePage-1)*12].name}</Col>
+    </Row>
+    <Row>
+      <Col>{products[9+(activePage-1)*12].name}</Col>
+      <Col>{products[10+(activePage-1)*12].name}</Col>
+      <Col>{products[11+(activePage-1)*12].name}</Col>
+    </Row>
+  </Container>
+  )
+}
+
 let items = [];
 for (let number = 1; number <= 5; number++) {
   items.push(
     <LinkContainer to={`/bedroom/${number}`}>
-    <Pagination.Item key={number} activeLabel='(current)'>
+    <Pagination.Item key={number} activeLabel='(current)' active={number===activePage()} >
       {number}
     </Pagination.Item>
     </LinkContainer>
@@ -115,10 +160,14 @@ for (let number = 1; number <= 5; number++) {
         </Table.Footer>
       </Table>
     </Segment> */
+              <React.Fragment>
+                {buildRows()}
               <div>
                     <Pagination>{items}</Pagination>
+                    {/* <div>{active}</div> */}
 
               </div>
+              </React.Fragment>
 
   );
 }
