@@ -29,7 +29,6 @@ export default class MainRouter extends Component{
 	}	
 
 	render() {
-		console.log(this.state.products)
 		return (
 			<React.Fragment>
 			<h1>React Funiture Store</h1>

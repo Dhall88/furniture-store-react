@@ -41,22 +41,6 @@ const ProductTable = (props) => {
     //   )
     // })
 
-    const products = tagFilter(props.products)
-    const pages = Math.ceil(products.length/12)
-
-    console.log(window.location.href)
-    
-    const activePage = () => {
-      const arr = window.location.href.split('/');
-      const active = Number(arr[arr.length-1])
-
-      if (Number.isInteger(active)&&active<pages) {
-        return active
-      }
-      return 1 
-
-    }
-
     const tagFilter = (arr) => {
       let res = [];
       console.log(props.tag)
@@ -68,63 +52,73 @@ const ProductTable = (props) => {
       return res;
     }
 
-// console.log(props.products)
+    const activePage = () => {
+    
+      if (Number.isInteger(active)&&active<=pages) {
+        return active
+      }
+      return 1 
+    }
 
-const buildRows = () => {
-  const activePage = activePage();
+    const pages = Math.ceil((tagFilter(props.products).length)/12);
+    const arr = window.location.href.split('/');
+    const active = Number(arr[arr.length-1])
+    const currentPaginationPage = activePage();
+    const filteredProducts = tagFilter(props.products);
 
-  return (
-  <Container>
-    <Row>
-      <Col>{products[0+(activePage-1)*12].name === undefined ? }</Col>
-      <Col>{products[1+(activePage-1)*12].name}</Col>
-      <Col>{products[2+(activePage-1)*12].name}</Col>
-    </Row>
-      <Row>
-      <Col>{products[3+(activePage-1)*12].name}</Col>
-      <Col>{products[4+(activePage-1)*12].name}</Col>
-      <Col>{products[5+(activePage-1)*12].name}</Col>
-    </Row>
-      <Row>
-      <Col>{products[6+(activePage-1)*12].name}</Col>
-      <Col>{products[7+(activePage-1)*12].name}</Col>
-      <Col>{products[8+(activePage-1)*12].name}</Col>
-    </Row>
-    <Row>
-      <Col>{products[9+(activePage-1)*12].name}</Col>
-      <Col>{products[10+(activePage-1)*12].name}</Col>
-      <Col>{products[11+(activePage-1)*12].name}</Col>
-    </Row>
-  </Container>
-  )
-}
+// PRODUCTS
+// Math.ceil(tagFilter(props.products).length/12)
+
+let rows=[[],[],[],[]];
+let row0, row1, row2, row3=[]
+    
+      for(let i = 0; i<4; i++) {
+        for(let j = 0; j<3; j++) {
+          if(filteredProducts[(i*3+j)]===undefined) {
+          rows[i].push(null)
+          }
+          else {
+            rows[i].push(filteredProducts[(i*3+j)])
+          }
+        }
+      }
+
+      row0 = rows[0].map(product => {
+        return <Col>
+                  {product!==null?product.name:""}
+              </Col>
+      })
+
+      row1 = rows[1].map(product => {
+        return <Col>
+                  {product!==null?product.name:""}
+              </Col>
+      })
+
+      row2 = rows[2].map(product => {
+        return <Col>
+                  {product!==null?product.name:""}
+              </Col>
+      })
+
+      row3 = rows[3].map(product => {
+        return <Col>
+                  {product!==null?product.name:""}
+              </Col>
+      })
+        
+      
 
 let items = [];
-for (let number = 1; number <= 5; number++) {
+for (let number = 1; number <= pages; number++) {
   items.push(
     <LinkContainer to={`/bedroom/${number}`}>
-    <Pagination.Item key={number} activeLabel='(current)' active={number===activePage()} >
+    <Pagination.Item key={number} activeLabel='(current)' active={number===currentPaginationPage} >
       {number}
     </Pagination.Item>
     </LinkContainer>
   );
 }
-        
-        // <Table.Row
-        //   key={product.id}
-        //   // onClick={() => setSelectedId(product.id)}
-        //   // active={product.id === selectedId}
-        // >
-        //   <Table.Cell>{product.id}</Table.Cell>
-        //   <Table.Cell>{product.name}</Table.Cell>
-        //   <Table.Cell>{product.price}</Table.Cell>
-        //   <Table.Cell>{product.description}</Table.Cell>
-        // </Table.Row>
-        // <Container>
-        //   <Row>
-        //     <Col></Col>
-        //   </Row>
-        // </Container>
 
   
   return (
@@ -161,7 +155,20 @@ for (let number = 1; number <= 5; number++) {
       </Table>
     </Segment> */
               <React.Fragment>
-                {buildRows()}
+                <Container>
+                  <Row>
+                    {row0}
+                  </Row>
+                  <Row>
+                    {row1}
+                  </Row>
+                  <Row>
+                    {row2}
+                  </Row>
+                  <Row>
+                    {row3}
+                  </Row>
+                </Container>
               <div>
                     <Pagination>{items}</Pagination>
                     {/* <div>{active}</div> */}
