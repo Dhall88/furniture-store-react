@@ -60,17 +60,17 @@ const ProductTable = (props) => {
       return 1 
     }
 
+
     const pages = Math.ceil((tagFilter(props.products).length)/12);
     const arr = window.location.href.split('/');
     const active = Number(arr[arr.length-1])
     const currentPaginationPage = activePage();
     const filteredProducts = tagFilter(props.products);
 
-// PRODUCTS
-// Math.ceil(tagFilter(props.products).length/12)
+    // Build rows for Table
 
-let rows=[[],[],[],[]];
-let row0, row1, row2, row3=[]
+    let rows=[[],[],[],[]];
+    let row0, row1, row2, row3=[]
     
       for(let i = 0; i<4; i++) {
         for(let j = 0; j<3; j++) {
@@ -107,54 +107,24 @@ let row0, row1, row2, row3=[]
               </Col>
       })
         
-      
+      // Build pagination buttons
 
-let items = [];
-for (let number = 1; number <= pages; number++) {
-  items.push(
-    <LinkContainer to={`/bedroom/${number}`}>
-    <Pagination.Item key={number} activeLabel='(current)' active={number===currentPaginationPage} >
-      {number}
-    </Pagination.Item>
-    </LinkContainer>
-  );
-}
+      let items = [];
+
+      for (let number = 1; number <= pages; number++) {
+        items.push(
+          <LinkContainer to={`/bedroom/${number}`}>
+          <Pagination.Item key={number} activeLabel='(current)' active={number===currentPaginationPage} >
+            {number}
+          </Pagination.Item>
+          </LinkContainer>
+        );
+      }
 
   
   return (
-    // <Segment>
-    // {console.log('rendered')}
-    //   <Table celled striped selectable>
-    //     <Table.Header>
-    //       <Table.Row>
-    //         <Table.HeaderCell>Id</Table.HeaderCell>
-    //         <Table.HeaderCell>Name</Table.HeaderCell>
-    //         <Table.HeaderCell>Price</Table.HeaderCell>
-    //         <Table.HeaderCell>Description</Table.HeaderCell>
-    //       </Table.Row>
-    //     </Table.Header>
-    //     <Table.Body>{rows}</Table.Body>
-    //     <Table.Footer fullWidth>
-    //       <Table.Row>
-    //         <Table.HeaderCell />
-    //         <Table.HeaderCell colSpan="4">
-              /* <Button
-                floated="right"
-                icon
-                labelPosition="left"
-                color="red"
-                size="small"
-                disabled={!selectedId}
-                // onClick={}
-              >  */
-              /* <Icon name="trash" /> Remove User
-              </Button> */
-            /* </Table.HeaderCell>
-          </Table.Row>
-        </Table.Footer>
-      </Table>
-    </Segment> */
               <React.Fragment>
+                
                 <Container>
                   <Row>
                     {row0}
@@ -169,11 +139,11 @@ for (let number = 1; number <= pages; number++) {
                     {row3}
                   </Row>
                 </Container>
-              <div>
-                    <Pagination>{items}</Pagination>
-                    {/* <div>{active}</div> */}
 
-              </div>
+                <Container>
+                  <Pagination>{items}</Pagination>
+                </Container>
+
               </React.Fragment>
 
   );
