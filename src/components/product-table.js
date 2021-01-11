@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
 import { Container, Row, Col, Pagination, PageItem} from "react-bootstrap"
 import {LinkContainer} from "react-router-bootstrap"
+// import image from '../imgs/balta-metal-bed/balta-metal-bed-1.jpg'
 // import { ProductContext } from "../context/product-context";
 
 // export default function ProductTable() {
@@ -85,26 +86,39 @@ const ProductTable = (props) => {
 
       row0 = rows[0].map(product => {
         return <Col>
-                  {product!==null?product.name:""}
+                  <Container>
+                    <h3>{product!==null?product.name:""}</h3>
+                    <img src={product!==null?product.pictures[0]:""}></img>
+                  </Container>
               </Col>
       })
 
       row1 = rows[1].map(product => {
+        // console.log(product.pictures[0])
         return <Col>
-                  {product!==null?product.name:""}
+                  <Container>
+                    <h3>{product!==null?product.name:""}</h3>
+                    <img src={product!==null?product.pictures[0]:""}></img>
+                  </Container>
               </Col>
       })
 
       row2 = rows[2].map(product => {
         return <Col>
-                  {product!==null?product.name:""}
-              </Col>
+        <Container>
+          <h3>{product!==null?product.name:""}</h3>
+          <img src={product!==null?product.pictures[0]:""}></img>
+        </Container>
+    </Col>
       })
 
       row3 = rows[3].map(product => {
         return <Col>
-                  {product!==null?product.name:""}
-              </Col>
+        <Container>
+          <h3>{product!==null?product.name:""}</h3>
+          <img src={product!==null?product.pictures[0]:""}></img>
+        </Container>
+    </Col>
       })
         
       // Build pagination buttons
@@ -124,7 +138,13 @@ const ProductTable = (props) => {
   
   return (
               <React.Fragment>
-                
+                {/* <img src={image}/> */}
+                {/* <img src={"../imgs/balta-metal-bed/balta-metal-bed-1.jpg"}/> */}
+                {/* <img src={require('../imgs/balta-metal-bed/balta-metal-bed-1.jpg')} /> */}
+                {/* <img src={props.products[0].pictures[0]}></img> */}
+                <img className="img-fluid" 
+     src={`${process.env.PUBLIC_URL}/assets/balta-metal-bed-1.jpg`} 
+     alt="logo"/>
                 <Container>
                   <Row>
                     {row0}

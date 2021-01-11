@@ -32,6 +32,7 @@ export default class MainRouter extends Component{
 		return (
 			<React.Fragment>
 			<h1>React Funiture Store</h1>
+			<img src="./imgs/mid-century-dresser.webp"></img>
 				<HashRouter>
 					<header>
 						<nav>
