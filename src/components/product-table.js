@@ -75,7 +75,7 @@ const ProductTable = (props) => {
     
       for(let i = 0; i<4; i++) {
         for(let j = 0; j<3; j++) {
-          if(filteredProducts[(i*3+j)]===undefined) {
+          if(filteredProducts[(i*3+j+(currentPaginationPage*12))]===undefined) {
           rows[i].push(null)
           }
           else {
