@@ -42,6 +42,11 @@ const ProductTable = (props) => {
     //   )
     // })
 
+    const imgStyle = {
+      height: '200px',
+      width: '200px'
+    }
+
     const tagFilter = (arr) => {
       let res = [];
       console.log(props.tag)
@@ -67,6 +72,9 @@ const ProductTable = (props) => {
     const active = Number(arr[arr.length-1])
     const currentPaginationPage = activePage();
     const filteredProducts = tagFilter(props.products);
+    console.log(currentPaginationPage)
+
+    // console.log(filteredProducts)
 
     // Build rows for Table
 
@@ -75,7 +83,7 @@ const ProductTable = (props) => {
     
       for(let i = 0; i<4; i++) {
         for(let j = 0; j<3; j++) {
-          if(filteredProducts[(i*3+j+(currentPaginationPage*12))]===undefined) {
+          if(filteredProducts[(i*3+j+((currentPaginationPage-1)*12))]===undefined) {
           rows[i].push(null)
           }
           else {
@@ -83,41 +91,51 @@ const ProductTable = (props) => {
           }
         }
       }
+      console.log(rows)
+      const link = `${process.env.PUBLIC_URL}/assets/imgs/`
 
       row0 = rows[0].map(product => {
         return <Col>
+                  {product!==null?
                   <Container>
                     <h3>{product!==null?product.name:""}</h3>
-                    <img src={product!==null?product.pictures[0]:""}></img>
-                  </Container>
+                    <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+                  </Container>:""
+                  } 
               </Col>
       })
 
       row1 = rows[1].map(product => {
         // console.log(product.pictures[0])
         return <Col>
-                  <Container>
-                    <h3>{product!==null?product.name:""}</h3>
-                    <img src={product!==null?product.pictures[0]:""}></img>
-                  </Container>
-              </Col>
+        {product!==null?
+        <Container>
+          <h3>{product!==null?product.name:""}</h3>
+          <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+        </Container>:""
+        } 
+    </Col>
       })
 
       row2 = rows[2].map(product => {
         return <Col>
+        {product!==null?
         <Container>
           <h3>{product!==null?product.name:""}</h3>
-          <img src={product!==null?product.pictures[0]:""}></img>
-        </Container>
+          <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+        </Container>:""
+        } 
     </Col>
       })
 
       row3 = rows[3].map(product => {
         return <Col>
+        {product!==null?
         <Container>
           <h3>{product!==null?product.name:""}</h3>
-          <img src={product!==null?product.pictures[0]:""}></img>
-        </Container>
+          <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+        </Container>:""
+        } 
     </Col>
       })
         
@@ -143,7 +161,7 @@ const ProductTable = (props) => {
                 {/* <img src={require('../imgs/balta-metal-bed/balta-metal-bed-1.jpg')} /> */}
                 {/* <img src={props.products[0].pictures[0]}></img> */}
                 <img className="img-fluid" 
-     src={`${process.env.PUBLIC_URL}/assets/balta-metal-bed-1.jpg`} 
+     src={`${link}jumbotron-bedroom.jpg`} 
      alt="logo"/>
                 <Container>
                   <Row>
