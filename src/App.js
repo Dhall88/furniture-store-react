@@ -92,6 +92,8 @@ export default class MainRouter extends Component{
 						<Route path="/bedroom" component={()=>Bedroom(this.state.products)} />
 						<Route path="/outdoor" component={Outdoor} />
 						<Route path="/bathroom" component={Bathroom} />
+						<Route path="/product" component={ProductView} />
+						{/* <Route path="/product" component={ProductView} /> */}
 				</HashRouter>
 			</React.Fragment>
 		);

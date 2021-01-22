@@ -1,15 +1,34 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
-import { Container, Row, Col, Pagination, PageItem} from "react-bootstrap"
+import { Container, Row, Col, Pagination, PageItem, Image, Modal, Carousel} from "react-bootstrap"
 import {LinkContainer} from "react-router-bootstrap"
 // import image from '../imgs/balta-metal-bed/balta-metal-bed-1.jpg'
 // import { ProductContext } from "../context/product-context";
+import ProductView from '../views/product-view'
+import { HashRouter, NavLink, Route } from 'react-router-dom';
+
 
 // export default function ProductTable() {
 
 // console.log()
 
 const ProductTable = (props) => {
+
+  const [show, setShow] = useState(false);
+  const[activeId, setId] = useState(null)
+
+  // if(activeId!==null){
+
+  // }
+
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true);
+    setId(id);
+  }
+  const handleId = (id) => setId(id);
+
+
   // // Subscribe to `products` state and access dispatch function
   // const [state, dispatch] = useContext(ProductContext);
   // // Declare a local state to be used internally by this component
@@ -49,7 +68,7 @@ const ProductTable = (props) => {
 
     const tagFilter = (arr) => {
       let res = [];
-      console.log(props.tag)
+      // console.log(props.tag)
       for(let i = 0; i<arr.length; i++) {
         if(arr[i].tags.search(props.tag)!=-1) {
           res.push(arr[i])
@@ -67,74 +86,82 @@ const ProductTable = (props) => {
     }
 
 
-    const pages = Math.ceil((tagFilter(props.products).length)/12);
+    const pages = Math.ceil((tagFilter(props.products).length)/9);
     const arr = window.location.href.split('/');
     const active = Number(arr[arr.length-1])
     const currentPaginationPage = activePage();
     const filteredProducts = tagFilter(props.products);
-    console.log(currentPaginationPage)
 
-    // console.log(filteredProducts)
+
+
 
     // Build rows for Table
 
-    let rows=[[],[],[],[]];
-    let row0, row1, row2, row3=[]
+    let rows=[[],[],[]];
+    let row0, row1, row2=[];
     
-      for(let i = 0; i<4; i++) {
+      for(let i = 0; i<3; i++) {
         for(let j = 0; j<3; j++) {
-          if(filteredProducts[(i*3+j+((currentPaginationPage-1)*12))]===undefined) {
+          if(filteredProducts[(i*3+j+((currentPaginationPage-1)*9))]===undefined) {
           rows[i].push(null)
           }
           else {
-            rows[i].push(filteredProducts[(i*3+j)])
+            rows[i].push(filteredProducts[(i*3+j+((currentPaginationPage-1)*9))])
           }
         }
       }
-      console.log(rows)
+      console.log(active);
+      console.log(currentPaginationPage)
+
+      const myFunc = (event) => {
+        console.log(event.currentTarget)
+      } 
+
+
       const link = `${process.env.PUBLIC_URL}/assets/imgs/`
 
-      row0 = rows[0].map(product => {
+      row0 = rows[0].map((product,index) => {
+
         return <Col>
+        
                   {product!==null?
-                  <Container>
+                // <LinkContainer to="/product/test">
+                  <Container onClick={() => handleShow(index)} 
+                    id={index}>
                     <h3>{product!==null?product.name:""}</h3>
-                    <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
-                  </Container>:""
+                    <Image src={product!==null?`${link}${product.pictures[0]}`:""} thumbnail/>
+                  </Container>
+                  // </LinkContainer>
+                  :""
                   } 
+                 
               </Col>
       })
 
-      row1 = rows[1].map(product => {
+      row1 = rows[1].map((product,index) => {
         // console.log(product.pictures[0])
+        
         return <Col>
         {product!==null?
-        <Container>
-          <h3>{product!==null?product.name:""}</h3>
-          <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
-        </Container>:""
+          <Container onClick={myFunc} id={index+3}>
+            <h3>{product!==null?product.name:""}</h3>
+            <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+          </Container>:""
+          
         } 
     </Col>
       })
 
-      row2 = rows[2].map(product => {
+      row2 = rows[2].map((product,index) => {
         return <Col>
         {product!==null?
-        <Container>
-          <h3>{product!==null?product.name:""}</h3>
-          <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
-        </Container>:""
-        } 
-    </Col>
-      })
-
-      row3 = rows[3].map(product => {
-        return <Col>
-        {product!==null?
-        <Container>
-          <h3>{product!==null?product.name:""}</h3>
-          <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
-        </Container>:""
+        <LinkContainer to={`/product`}>
+          <Container onClick={myFunc} id={index+6}>
+            <h3>{product!==null?product.name:""}</h3>
+            <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+          </Container>
+          </LinkContainer>:""
+          
         } 
     </Col>
       })
@@ -156,13 +183,21 @@ const ProductTable = (props) => {
   
   return (
               <React.Fragment>
-                {/* <img src={image}/> */}
-                {/* <img src={"../imgs/balta-metal-bed/balta-metal-bed-1.jpg"}/> */}
-                {/* <img src={require('../imgs/balta-metal-bed/balta-metal-bed-1.jpg')} /> */}
-                {/* <img src={props.products[0].pictures[0]}></img> */}
-                <img className="img-fluid" 
-     src={`${link}jumbotron-bedroom.jpg`} 
-     alt="logo"/>
+                {show?
+                <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>{filteredProducts[activeId].name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handleClose}>
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Modal>:""}
                 <Container>
                   <Row>
                     {row0}
@@ -173,9 +208,7 @@ const ProductTable = (props) => {
                   <Row>
                     {row2}
                   </Row>
-                  <Row>
-                    {row3}
-                  </Row>
+                  
                 </Container>
 
                 <Container>
