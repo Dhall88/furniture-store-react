@@ -32,7 +32,7 @@ export default function Bedroom(products) {
 
 
   return (
-    <CartContextProvider>
+    <React.Fragment>
           <Jumbotron style={jumboStyle} fluid>
       <h1>Bedroom</h1>
       <div style={divStyle}>
@@ -47,6 +47,6 @@ export default function Bedroom(products) {
 
       <Catagory products={products} tag='bedroom'/>
 
-    </CartContextProvider>
+    </React.Fragment>
   );
 }

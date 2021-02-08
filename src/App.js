@@ -11,6 +11,7 @@ import Storage from "./views/storage";
 import Outdoor from "./views/outdoor";
 import { render } from '@testing-library/react';
 import { CartContextProvider } from "./context/cart-context";
+import Cart from "./views/cart-view"
 
 export default class MainRouter extends Component{
 
@@ -32,6 +33,7 @@ export default class MainRouter extends Component{
 	render() {
 		return (
 			<CartContextProvider>
+				<Cart/>
 			<h1>React Funiture Store</h1>
 			<img src="./imgs/mid-century-dresser.webp"></img>
 				<HashRouter>

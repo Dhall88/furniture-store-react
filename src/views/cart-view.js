@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Segment, Header } from "semantic-ui-react";
-import ContactForm from "../components/contact-form";
-import ContactTable from "../components/contact-table";
-import { CartContextProvider } from "../context/cart-context";
+import { CartContext } from "../context/cart-context";
 
-export default function Contacts() {
+export default function Cart() {
+    const [state, dispatch] = useContext(CartContext);
   return (
-    <CartContextProvider>
-      <div></div>
-    </CartContextProvider>
+
+      <ul>
+          {state.products.map(product => {
+              return <li>{product.name}</li>
+          })}
+      </ul>
+
   );
 }
