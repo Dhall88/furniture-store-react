@@ -3,34 +3,13 @@ import React, { useReducer, createContext } from "react";
 export const CartContext = createContext();
 
 const initialState = {
-  products: [
-    {
-      id: "098",
-      name: "Bed",
-      price: 100,
-      description: "big and sqishy",
-      tags: ["bedroom"]
-    },
-    {
-      id: "099",
-      name: "Table",
-      price: 150,
-      description: "good at holding stuff",
-      tags: ["bedroom","dining room"]
-    },
-    {
-      id: "100",
-      name: "TV Stand",
-      price: 50,
-      description: "holds a tv nicely",
-      tags: ["living room, storage"]
-    }
-  ],
+  products: [],
   loading: false,
   error: null
 };
 
 const reducer = (state, action) => {
+  console.log(action.payload)
   switch (action.type) {
     case "ADD_PRODUCT":
       return {

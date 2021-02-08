@@ -5,6 +5,9 @@ import {LinkContainer} from "react-router-bootstrap"
 // import image from '../imgs/balta-metal-bed/balta-metal-bed-1.jpg'
 // import { ProductContext } from "../context/product-context";
 import ProductView from '../views/product-view'
+import {CartContext} from '../context/cart-context'
+
+
 import { HashRouter, NavLink, Route } from 'react-router-dom';
 
 
@@ -15,7 +18,9 @@ import { HashRouter, NavLink, Route } from 'react-router-dom';
 const ProductTable = (props) => {
 
   const [show, setShow] = useState(false);
-  const[activeId, setId] = useState(null)
+  const[activeId, setId] = useState(null);
+  const [state, dispatch] = useContext(CartContext);
+  console.log(state.products)
 
   // if(activeId!==null){
 
@@ -26,6 +31,14 @@ const ProductTable = (props) => {
     setShow(true);
     setId(id);
   }
+
+  const onSubmit = () => {
+    dispatch({
+      type: "ADD_PRODUCT",
+      payload: filteredProducts[activeId]
+    });
+    // Reset Form
+  };
 
 
 
@@ -68,7 +81,6 @@ const ProductTable = (props) => {
 
     const tagFilter = (arr) => {
       let res = [];
-      // console.log(props.tag)
       for(let i = 0; i<arr.length; i++) {
         if(arr[i].tags.search(props.tag)!=-1) {
           res.push(arr[i])
@@ -202,7 +214,7 @@ const ProductTable = (props) => {
                   {filteredProducts[activeId].description}
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
+                  <Button variant="secondary" onClick={onSubmit}>
                     Add To Cart
                   </Button>
                   <Button variant="primary" onClick={handleClose}>

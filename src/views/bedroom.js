@@ -6,6 +6,7 @@ import ProductTable from "../components/product-table";
 import { Container, Row, Col, Jumbotron, Button, Pagination } from 'react-bootstrap';
 // import { ProductContextProvider, ProductContext } from "../context/product-context";
 import Catagory from './catagory'
+import { CartContextProvider } from "../context/cart-context";
 const link = process.env.PUBLIC_URL
 // import bgimage from `${link}/assets/imgs/jumbotron-bedroom.jpg`
 
@@ -31,7 +32,7 @@ export default function Bedroom(products) {
 
 
   return (
-    <div>
+    <CartContextProvider>
           <Jumbotron style={jumboStyle} fluid>
       <h1>Bedroom</h1>
       <div style={divStyle}>
@@ -46,6 +47,6 @@ export default function Bedroom(products) {
 
       <Catagory products={products} tag='bedroom'/>
 
-    </div>
+    </CartContextProvider>
   );
 }

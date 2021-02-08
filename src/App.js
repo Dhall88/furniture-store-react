@@ -10,6 +10,7 @@ import LivingRoom from "./views/living-room";
 import Storage from "./views/storage";
 import Outdoor from "./views/outdoor";
 import { render } from '@testing-library/react';
+import { CartContextProvider } from "./context/cart-context";
 
 export default class MainRouter extends Component{
 
@@ -30,7 +31,7 @@ export default class MainRouter extends Component{
 
 	render() {
 		return (
-			<React.Fragment>
+			<CartContextProvider>
 			<h1>React Funiture Store</h1>
 			<img src="./imgs/mid-century-dresser.webp"></img>
 				<HashRouter>
@@ -95,7 +96,7 @@ export default class MainRouter extends Component{
 						<Route path="/product" component={ProductView} />
 						{/* <Route path="/product" component={ProductView} /> */}
 				</HashRouter>
-			</React.Fragment>
+			</CartContextProvider>
 		);
 }
 }
