@@ -26,7 +26,7 @@ const ProductTable = (props) => {
     setShow(true);
     setId(id);
   }
-  const handleId = (id) => setId(id);
+
 
 
   // // Subscribe to `products` state and access dispatch function
@@ -110,8 +110,6 @@ const ProductTable = (props) => {
           }
         }
       }
-      console.log(active);
-      console.log(currentPaginationPage)
 
       const myFunc = (event) => {
         console.log(event.currentTarget)
@@ -126,7 +124,7 @@ const ProductTable = (props) => {
         
                   {product!==null?
                 // <LinkContainer to="/product/test">
-                  <Container onClick={() => handleShow(index)} 
+                  <Container onClick={() => handleShow(index+((currentPaginationPage-1)*9))} 
                     id={index}>
                     <h3>{product!==null?product.name:""}</h3>
                     <Image src={product!==null?`${link}${product.pictures[0]}`:""} thumbnail/>
@@ -143,9 +141,9 @@ const ProductTable = (props) => {
         
         return <Col>
         {product!==null?
-          <Container onClick={myFunc} id={index+3}>
+          <Container onClick={() => handleShow(index+3+((currentPaginationPage-1)*9))}>
             <h3>{product!==null?product.name:""}</h3>
-            <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+            <Image src={product!==null?`${link}${product.pictures[0]}`:""} thumbnail/>
           </Container>:""
           
         } 
@@ -155,12 +153,12 @@ const ProductTable = (props) => {
       row2 = rows[2].map((product,index) => {
         return <Col>
         {product!==null?
-        <LinkContainer to={`/product`}>
-          <Container onClick={myFunc} id={index+6}>
+
+          <Container onClick={() => handleShow(index+6+((currentPaginationPage-1)*9))}>
             <h3>{product!==null?product.name:""}</h3>
-            <img src={product!==null?`${link}${product.pictures[0]}`:""} style={imgStyle}></img>
+            <Image src={product!==null?`${link}${product.pictures[0]}`:""} thumbnail/>
           </Container>
-          </LinkContainer>:""
+          :""
           
         } 
     </Col>
@@ -188,13 +186,27 @@ const ProductTable = (props) => {
                 <Modal.Header closeButton>
                   <Modal.Title>{filteredProducts[activeId].name}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>
+                <Carousel>
+                  {filteredProducts[activeId].pictures.map(picture => {
+                      return <Carousel.Item>
+                      <img
+                        className="d-block w-100"
+                        src={`${link}${picture}`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                  })}
+
+</Carousel>
+                  {filteredProducts[activeId].description}
+                </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    Add To Cart
                   </Button>
                   <Button variant="primary" onClick={handleClose}>
-                    Save Changes
+                    Close
                   </Button>
                 </Modal.Footer>
               </Modal>:""}
