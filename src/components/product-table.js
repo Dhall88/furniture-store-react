@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
-import { Container, Row, Col, Pagination, PageItem, Image, Modal, Carousel} from "react-bootstrap"
+import { Container, Row, Col, Pagination, PageItem, Image, Modal, Carousel, InputGroup, FormControl, Form} from "react-bootstrap"
 import {LinkContainer} from "react-router-bootstrap"
 // import image from '../imgs/balta-metal-bed/balta-metal-bed-1.jpg'
 // import { ProductContext } from "../context/product-context";
@@ -20,7 +20,8 @@ const ProductTable = (props) => {
   const [show, setShow] = useState(false);
   const[activeId, setId] = useState(null);
   const [state, dispatch] = useContext(CartContext);
-  console.log(state.products)
+  const [quantity, setQuantity] = useState(1)
+  // console.log(state.products)
 
   // if(activeId!==null){
 
@@ -32,10 +33,12 @@ const ProductTable = (props) => {
     setId(id);
   }
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    let cartItem = filteredProducts[activeId];
+    cartItem.quantity = quantity;
     dispatch({
       type: "ADD_PRODUCT",
-      payload: filteredProducts[activeId]
+      payload: cartItem
     });
     // Reset Form
   };
@@ -190,6 +193,7 @@ const ProductTable = (props) => {
         );
       }
 
+      
   
   return (
               <React.Fragment>
@@ -214,9 +218,22 @@ const ProductTable = (props) => {
                   {filteredProducts[activeId].description}
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={onSubmit}>
-                    Add To Cart
-                  </Button>
+                  {/* <input type="number"></input> */}
+                  <Form onSubmit={onSubmit}>
+
+                    <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>#</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl type="number" value={quantity} onChange={e => {setQuantity(e.target.value)}}  />
+                    </InputGroup>
+
+                    <Button type="submit" variant="secondary">
+                      Add To Cart
+                    </Button>
+
+                  </Form>
+
                   <Button variant="primary" onClick={handleClose}>
                     Close
                   </Button>

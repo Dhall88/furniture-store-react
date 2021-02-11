@@ -1,16 +1,27 @@
 import React, { useState, useContext } from "react";
-import { Segment, Header } from "semantic-ui-react";
 import { CartContext } from "../context/cart-context";
+import { Container, Row, Col, Pagination, PageItem, Image, Modal, Carousel, Table} from "react-bootstrap"
 
 export default function Cart() {
     const [state, dispatch] = useContext(CartContext);
+
+    const link = `${process.env.PUBLIC_URL}/assets/imgs/`
+
+    const rows = state.products.map(product => {
+        return <tr>
+            <td><Image src={`${link}${product.pictures[0]}`} thumbnail/></td>
+            <td>{product.name}</td>
+            <td>{product.quantity}</td>
+            <td>{product.quantity*product.price}</td>
+        </tr>
+    })
   return (
 
-      <ul>
-          {state.products.map(product => {
-              return <li>{product.name}</li>
-          })}
-      </ul>
+    <Table striped bordered hover>
+    <tbody>
+      {rows}
+    </tbody>
+  </Table>
 
   );
 }
