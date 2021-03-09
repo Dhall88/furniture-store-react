@@ -12,7 +12,7 @@ export default function Cart() {
             <td><Image src={`${link}${product.pictures[0]}`} thumbnail/></td>
             <td>{product.name}</td>
             <td>{product.quantity}</td>
-            <td>{product.quantity*product.price}</td>
+            <td>{(product.quantity*product.price).toFixed(2)}</td>
         </tr>
     })
   return (

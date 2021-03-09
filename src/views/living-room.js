@@ -1,13 +1,43 @@
-import React, { useReducer, createContext, useEffect, useContext } from 'react'
-import { Segment, Header } from "semantic-ui-react";
-// import ProductForm from "../components/product-form";
-import ProductTable from "../components/product-table";
-// import { ProductContextProvider, ProductContext } from "../context/product-context";
+import React from 'react'
+import { Jumbotron, Button } from 'react-bootstrap';
 import Catagory from './catagory'
+const link = process.env.PUBLIC_URL
 
 
-export default function LivingRoom(products) {
+
+export default function Livingroom(products) {
+
+  const jumboStyle = {
+    position: 'relative',
+    color: 'blue',
+    backgroundImage: `url(${link}/assets/imgs/jumbotron-bedroom.jpg)`,
+    height: '25em',
+    backgroundSize: '100% 100%'
+  };
+
+  const divStyle = {
+    width: '10rem',
+      marginLeft: '85%',
+      marginTop: '13rem'
+  }
+
+
   return (
-    <Catagory products={products} tag='livingroom'/>
+    <React.Fragment>
+          <Jumbotron style={jumboStyle} fluid>
+              <h1>Living Room</h1>
+              <div style={divStyle}>
+                <p>
+                  Get started with some design ideas.
+                </p>
+                <p>
+                  <Button variant="primary">Learn more</Button>
+                </p>
+              </div>
+          </Jumbotron>
+
+      <Catagory products={products} tag='living-room'/>
+
+    </React.Fragment>
   );
 }

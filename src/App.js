@@ -33,7 +33,6 @@ export default class MainRouter extends Component{
 	render() {
 		return (
 			<CartContextProvider>
-				<Cart/>
 			<h1>React Funiture Store</h1>
 			<img src="./imgs/mid-century-dresser.webp"></img>
 				<HashRouter>
@@ -81,12 +80,17 @@ export default class MainRouter extends Component{
 							>
 							Bathroom
 							</NavLink>
+							<NavLink
+							className='navlink'
+							exact
+							to="/cart"
+							>
+							Cart
+							</NavLink>
 						</nav>
 					</header>
-					<div
-						// className={Route.to === '/my-plots' ? '' : 'app-container'}
-						className={'site-container'}
-					>
+					<div className={'site-container'}>
+
 						<Route path="/" exact component={Home} />
 
 					</div>
@@ -96,6 +100,7 @@ export default class MainRouter extends Component{
 						<Route path="/outdoor" component={Outdoor} />
 						<Route path="/bathroom" component={Bathroom} />
 						<Route path="/product" component={ProductView} />
+						<Route path="/cart" component={Cart} />
 						{/* <Route path="/product" component={ProductView} /> */}
 				</HashRouter>
 			</CartContextProvider>
