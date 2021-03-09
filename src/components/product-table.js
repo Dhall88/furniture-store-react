@@ -1,10 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Segment, Table, Button, Icon } from "semantic-ui-react";
-import { Container, Row, Col, Pagination, PageItem, Image, Modal, Carousel, InputGroup, FormControl, Form} from "react-bootstrap"
+import React, { useState, useContext } from "react";
+import { Button} from "semantic-ui-react";
+import { Container, Row, Col, Pagination, Image, Modal, Carousel, InputGroup, FormControl, Form} from "react-bootstrap"
 import {LinkContainer} from "react-router-bootstrap"
-// import image from '../imgs/balta-metal-bed/balta-metal-bed-1.jpg'
-// import { ProductContext } from "../context/product-context";
-import ProductView from '../views/product-view'
 import {CartContext} from '../context/cart-context'
 
 
@@ -126,10 +123,6 @@ const ProductTable = (props) => {
         }
       }
 
-      const myFunc = (event) => {
-        console.log(event.currentTarget)
-      } 
-
 
       const link = `${process.env.PUBLIC_URL}/assets/imgs/`
 
@@ -185,7 +178,7 @@ const ProductTable = (props) => {
 
       for (let number = 1; number <= pages; number++) {
         items.push(
-          <LinkContainer to={`/bedroom/${number}`}>
+          <LinkContainer to={`/${props.tag}/${number}`}>
           <Pagination.Item key={number} activeLabel='(current)' active={number===currentPaginationPage} >
             {number}
           </Pagination.Item>

@@ -12,6 +12,7 @@ import Outdoor from "./views/outdoor";
 import { render } from '@testing-library/react';
 import { CartContextProvider } from "./context/cart-context";
 import Cart from "./views/cart-view"
+import './App.css';
 
 export default class MainRouter extends Component{
 
@@ -34,7 +35,6 @@ export default class MainRouter extends Component{
 		return (
 			<CartContextProvider>
 			<h1>React Funiture Store</h1>
-			<img src="./imgs/mid-century-dresser.webp"></img>
 				<HashRouter>
 					<header>
 						<nav>
@@ -45,20 +45,20 @@ export default class MainRouter extends Component{
 							>
 								Home
 							</NavLink>
-              <NavLink
-								className='navlink'
-                exact
-                to="/living-room"
-              >
-                Living Room
-              </NavLink>
-              <NavLink
-								className='navlink'
-                exact
-                to="/storage"
-              >
-                Storage
-              </NavLink>
+							<NavLink
+												className='navlink'
+								exact
+								to="/livingroom"
+							>
+								Living Room
+							</NavLink>
+							<NavLink
+												className='navlink'
+								exact
+								to="/storage"
+							>
+								Storage
+							</NavLink>
 							<NavLink
 								className='navlink'
 								exact
@@ -94,14 +94,13 @@ export default class MainRouter extends Component{
 						<Route path="/" exact component={Home} />
 
 					</div>
-						<Route path="/living-room" component={()=>LivingRoom(this.state.products)} />
-						<Route path="/storage" component={Storage} />
+						<Route path="/livingroom" component={()=>LivingRoom(this.state.products)} />
+						<Route path="/storage" component={() =>Storage(this.state.products)} />
 						<Route path="/bedroom" component={()=>Bedroom(this.state.products)} />
-						<Route path="/outdoor" component={Outdoor} />
-						<Route path="/bathroom" component={Bathroom} />
+						<Route path="/outdoor" component={()=>Outdoor(this.state.products)} />
+						<Route path="/bathroom" component={()=>Bathroom(this.state.products)} />
 						<Route path="/product" component={ProductView} />
 						<Route path="/cart" component={Cart} />
-						{/* <Route path="/product" component={ProductView} /> */}
 				</HashRouter>
 			</CartContextProvider>
 		);

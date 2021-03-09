@@ -11,7 +11,7 @@ export default function Bathroom(products) {
   const jumboStyle = {
     position: 'relative',
     color: 'blue',
-    backgroundImage: `url(${link}/assets/imgs/jumbotron-bedroom.jpg)`,
+    backgroundImage: `url(${link}/assets/imgs/jumbotron-bathroom.jpg)`,
     height: '25em',
     backgroundSize: '100% 100%'
   };

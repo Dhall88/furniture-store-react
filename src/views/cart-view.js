@@ -8,20 +8,22 @@ export default function Cart() {
     const link = `${process.env.PUBLIC_URL}/assets/imgs/`
 
     const rows = state.products.map(product => {
-        return <tr>
-            <td><Image src={`${link}${product.pictures[0]}`} thumbnail/></td>
-            <td>{product.name}</td>
-            <td>{product.quantity}</td>
-            <td>{(product.quantity*product.price).toFixed(2)}</td>
-        </tr>
+        return  <tr>
+                  <td style={{width: 30 + '%'}}><Image src={`${link}${product.pictures[0]}`} fluid/></td>
+                  <td>{product.name}</td>
+                  <td>{product.quantity}</td>
+                  <td>{(product.quantity*product.price).toFixed(2)}</td>
+                </tr>
     })
   return (
+    <div className="response">
 
-    <Table striped bordered hover>
-    <tbody>
-      {rows}
-    </tbody>
-  </Table>
+      <Table striped bordered hover>
+      <tbody>
+        {rows}
+      </tbody>
+    </Table>
+  </div>
 
   );
 }

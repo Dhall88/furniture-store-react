@@ -10,7 +10,7 @@ export default function Storage(products) {
   const jumboStyle = {
     position: 'relative',
     color: 'blue',
-    backgroundImage: `url(${link}/assets/imgs/jumbotron-bedroom.jpg)`,
+    backgroundImage: `url(${link}/assets/imgs/jumbotron-storage.jpg)`,
     height: '25em',
     backgroundSize: '100% 100%'
   };

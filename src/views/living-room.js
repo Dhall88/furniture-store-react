@@ -10,7 +10,7 @@ export default function Livingroom(products) {
   const jumboStyle = {
     position: 'relative',
     color: 'blue',
-    backgroundImage: `url(${link}/assets/imgs/jumbotron-bedroom.jpg)`,
+    backgroundImage: `url(${link}/assets/imgs/jumbotron-livingroom.jpg)`,
     height: '25em',
     backgroundSize: '100% 100%'
   };
@@ -36,7 +36,7 @@ export default function Livingroom(products) {
               </div>
           </Jumbotron>
 
-      <Catagory products={products} tag='living-room'/>
+      <Catagory products={products} tag='livingroom'/>
 
     </React.Fragment>
   );
