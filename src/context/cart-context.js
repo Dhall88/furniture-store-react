@@ -17,8 +17,11 @@ const reducer = (state, action) => {
       };
     case "DEL_PRODUCT":
       return {
-        products: state.products.filter(
-          product => product.id !== action.payload
+        products: state.products.filter((product) => {
+          console.log(action.payload);
+          return product._id !== action.payload
+
+        }
         )
       };
     case "START":

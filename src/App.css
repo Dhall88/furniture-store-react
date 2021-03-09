@@ -2,3 +2,14 @@
   margin: auto;
   width: 60%;
 }
+
+td {
+  height: 100px;
+  font-size: 2rem;
+  line-height: 100px;
+}
+
+.navlink {
+  font-size: 2rem;
+  padding: 1rem;
+}
